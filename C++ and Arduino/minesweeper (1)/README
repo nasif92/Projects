@@ -1,0 +1,96 @@
+Student Name: David Herczeg
+Student ID: 1517370
+
+Student Name: Nasif Hossain
+Student ID: 1545143
+
+Included Files:
+
+- wiring_1.jpg
+- wiring_2.jpg
+- block.cpp
+- block.h
+- game.cpp
+- game.h
+- graphics.cpp
+- graphics.h
+- menu.cpp
+- menu.h
+- minsweeper.cpp
+- option.cpp
+- option.h
+- Makefile
+
+Accessories:
+
+- Arduino Mega Board 2560
+- LCD Display
+- Joystick
+- Pushbutton
+- Plenty of wires
+
+Wiring instructions:
+
+LCD Display Pin <---> Arduino Pin
+=================================
+GND                   GND
+Vin                   5V
+3Vo                   NOT CONNECTED
+CLK                   52
+MISO                  50
+MOSI                  51
+CS                    10
+D/C                   9
+RST                   NOT CONNECTED
+Lite                  NOT CONNECTED
+Y+                    A2
+X+                    4
+Y-                    5
+X-                    A3
+IM0 - IM3             NOT CONNECTED
+CCS                   NOT CONNECTED
+CD                    NOT CONNECTED
+
+Joystick Pin <---> Arduino Pin
+=================================
+GND                GND
+Vin                5V
+VRx                A1
+VRy                A0
+SW                 2
+
+Pushbutton Pin <---> Arduino Pin
+=================================
+GND                GND
+Vin                5V
+SW                 3
+
+How to Run the Code:
+
+Run the "make upload" command in the directory containing the included files while having the Arduino connected to the PC through a type A to type B USB cable. Make sure all the wires are properly connected to the LCD screen, joystick and pushbutton.
+
+Minesweeper:
+
+This Arduino program recreates the well-known game of Minesweeper. You must reveal all the blocks that do not contain a mine to win. Blocks that do not contain a mine show the number of mines one block adjacent to it (horizontally, vertically, and diagonally). You must use that information to deduce which blocks have mines and to reveal which blocks do not have mines.
+
+In this implementation, you will first be taken to a menu screen. Using the joystick, you can choose to get into the game or familiarize yourself with the controls ("Controls" is found in the next section of this README as well).
+
+Within the game, your cursor will be represented by a smiley face. Using the joystick, you can move the cursor around the grid. By pressing the joystick, the block underneath the cursor is revealed (if it doesn't contain a flag). You can toggle a flag on top of an unrevealed block by pressing the pushbutton. The flags are used to keep track of blocks you think contain a mine.
+
+Once all the blocks that do not contain a mine are revealed, you win the game. Otherwise, if you click on a block that contains a mine, all the mines are revealed. In either of these conditions, you'll need to press the reset button to play again.
+
+If you want to start a new game anytime, simply press the reset button. Each game is different as the mines are always randomized throughout the grid.
+
+Controls:
+
+  Menu Mode:
+
+  - Moving the joystick up and down highlights which option you can select.
+  - Pressing the joystick select the option that is highlighed.
+  - In "Controls" menu, pressing the joystick brings you back to the main menu.
+
+  Game Mode:
+
+  - Move the cursor using joystick.
+  - Reveal the block underneath the cursor by pressing the joystick.
+  - Toggle a flag on an unrevealed block by moving the cursor to the unrevealed block and pressing the pushbutton.
