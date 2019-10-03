@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">nhossain-RideBook</string>
+    <string name="add_button">ADD A RIDE?</string>
+    <string name="date">Enter date here</string>
+    <string name="total_distance">total_distance</string>
+
+</resources>
