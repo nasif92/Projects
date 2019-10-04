@@ -5,4 +5,4 @@ Some of the notable projects here:
 1) The minesweeper game in Arduino MEGA 2560. This was a game where me and my partner David Herczeg worked at making our own version of the minesweeper game. It is inside the C++ and Arduino folder.
 2) 2048 in python.
 3) The app I made for my personal assignment called RideBook.
-Enjoy!
+4) dictionary.java was one of my first personal java projects to make my life easier while taking attendance. It had some simple notations on how to start on Java using arrays and creating my first dictionary object.
