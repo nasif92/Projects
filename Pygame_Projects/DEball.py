@@ -1,4 +1,5 @@
 import pygame
+import random
 
 # starting pygame
 pygame.init()
@@ -25,17 +26,23 @@ def paddle(velocity):
    paddleImg = pygame.image.load('rect.jpg')
    paddle_width = 20
    paddle_length = 80
-
+   x_pos = 0
+   y_pos = 0
    # scaling it down for window
    paddleImg = pygame.transform.scale(paddleImg, (paddle_length, paddle_width))
    if x + velocity < 0:
       gameDisplay.blit(paddleImg, (0,y))
+      y_pos = y
    elif x + velocity > display_width - paddle_length:
       gameDisplay.blit(paddleImg, ( display_width - paddle_length , y))
-   #if x + velocity < display_width - paddle_length and x + velocity> 0:
+      x_pos = display_width - paddle_length
+      y_pos = y
    else:
       gameDisplay.blit(paddleImg, (x + velocity,y))
       pygame.display.update()
+      x_pos = x + velocity
+      y_pos = y
+   return x_pos,y_pos
 
 
 
@@ -50,11 +57,11 @@ class Ball:
 
    def draw(self):
       pygame.draw.circle(self.surface, self.color,self.pos,self.radius)
-      
+   
    def bounce(self):
-      # self.velocity[0] = -self.velocity[0]
-      # self.velocity[1] = randint(-8,8)
-      pass
+      self.speed[1] = -self.speed[1]
+      self.speed[0] = random.randint(-8,8)
+      
    def move(self):
       size = [display_width,display_height]
       for coord in range(0,2):
@@ -63,9 +70,13 @@ class Ball:
             self.speed[coord] = -self.speed[coord]
          if self.pos[coord] + self.radius > size[coord]:
             self.speed[coord] = -self.speed[coord]
-
+   def positions(self):
+      return self.pos
    
-
+def bounce_the_ball(radius,ball_x, ball_y, paddle_x, paddle_y):
+   if ball_y + radius <= paddle_y and ball_x + radius <= paddle_x:
+      return True
+   
 
 def main():
   
@@ -90,17 +101,20 @@ def main():
       if key_list[pygame.K_RIGHT]:
          x_change += 10
       gameDisplay.fill(backgroundColor)
-      paddle(x_change)
-      x = round(display_width/2)
-      y = round(display_height/2)
+      paddle_x,paddle_y = paddle(x_change)
+      
 
-      # the DE ball 
+      # the DE ball being drawn and moved
       DEBall.draw()
-
       DEBall.move()
 
+      ball_x, ball_y = DEBall.positions()
+      if bounce_the_ball(8,ball_x,ball_y, paddle_x, paddle_y):
+         DEBall.bounce()
 
-      pygame.display.flip()
+
+
+      pygame.display.update()
       clock.tick(60)
 
    pygame.quit()
