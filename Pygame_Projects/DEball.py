@@ -46,7 +46,7 @@ class Ball:
       self.color = color
       self.pos = [round(display_width/2),round(display_height/2)]
       self.radius = radius
-      self.speed = speed
+      self.speed = [speed, speed]
 
    def draw(self):
       pygame.draw.circle(self.surface, self.color,self.pos,self.radius)
@@ -58,12 +58,11 @@ class Ball:
    def move(self):
       size = [display_width,display_height]
       for coord in range(0,2):
-         self.pos[coord] = (self.pos[coord] + self.speed)
-         print(self.pos[coord])
+         self.pos[coord] += self.speed[coord]
          if self.pos[coord] < self.radius:
-            self.speed = -self.speed
+            self.speed[coord] = -self.speed[coord]
          if self.pos[coord] + self.radius > size[coord]:
-            self.speed = -self.speed
+            self.speed[coord] = -self.speed[coord]
 
    
 
@@ -101,7 +100,7 @@ def main():
       DEBall.move()
 
 
-      pygame.display.update()
+      pygame.display.flip()
       clock.tick(60)
 
    pygame.quit()
