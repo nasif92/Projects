@@ -58,7 +58,7 @@ class Ball:
    def move(self):
       size = [display_width,display_height]
       for coord in range(0,2):
-         self.pos[coord] += self.speed
+         self.pos[coord] = (self.pos[coord] + self.speed)
          print(self.pos[coord])
          if self.pos[coord] < self.radius:
             self.speed = -self.speed
@@ -74,7 +74,8 @@ def main():
    x_change = 0
    game_over = False
 
-   
+   DEBall = Ball(gameDisplay,white, 8 , 2)
+
    # the main game
    while not crashed:
       for event in pygame.event.get():
@@ -95,14 +96,13 @@ def main():
       y = round(display_height/2)
 
       # the DE ball 
-      DEBall = Ball(gameDisplay,white, 8 , 2)
       DEBall.draw()
 
       DEBall.move()
 
 
       pygame.display.update()
-      clock.tick(10)
+      clock.tick(60)
 
    pygame.quit()
    quit()
