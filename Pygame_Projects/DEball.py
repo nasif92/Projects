@@ -37,20 +37,7 @@ def paddle(velocity):
       gameDisplay.blit(paddleImg, (x + velocity,y))
       pygame.display.update()
 
-def ball(game_over):
-   x =  (int)(display_width /2)
-   y = (int)(display_height /2)
 
-   move = [ 10, -10]
-   while not game_over:
-      if x  <= 0:
-         pygame.draw.circle(gameDisplay ,white, (x + move[0] , y ), 12)
-      elif x  >= display_width:
-         pygame.draw.circle(gameDisplay ,white, (x + move[1] , y ), 12)
-      elif y <= 0:
-         pygame.draw.circle(gameDisplay ,white, (x  , y + move[0]), 12)
-      elif y >= 0 :
-         pygame.draw.circle(gameDisplay ,white, (x  , y + move[1]), 12)
 
 
 class Ball:
@@ -62,8 +49,8 @@ class Ball:
       self.speed = speed
 
    def draw(self):
-      pygame.draw.circle(self.surface, self.color,self.pos,self.radius)
-
+      pygame.draw.circle(self.surface, self.color,self.pos + self.speed,self.radius)
+      
    def bounce(self):
       # self.velocity[0] = -self.velocity[0]
       # self.velocity[1] = randint(-8,8)
@@ -72,11 +59,13 @@ class Ball:
       size = [display_width,display_height]
       for coord in range(0,2):
          self.pos[coord] += self.speed
+         print(self.pos[coord])
          if self.pos[coord] < self.radius:
             self.speed = -self.speed
          if self.pos[coord] + self.radius > size[coord]:
             self.speed = -self.speed
-      
+
+   
 
 
 def main():
@@ -102,16 +91,17 @@ def main():
          x_change += 10
       gameDisplay.fill(backgroundColor)
       paddle(x_change)
-
+      x = round(display_width/2)
+      y = round(display_height/2)
       # the DE ball 
-      DEBall = Ball(gameDisplay,white, [round(display_width/2),round(display_height/2)],8 , 2)
+      DEBall = Ball(gameDisplay,white, [x,y],8 , 2)
       DEBall.draw()
 
       DEBall.move()
 
 
       pygame.display.update()
-      clock.tick(60)
+      clock.tick(10)
 
    pygame.quit()
    quit()
