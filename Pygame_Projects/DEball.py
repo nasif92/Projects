@@ -54,12 +54,29 @@ def ball(game_over):
 
 
 class Ball:
-   def __init__(self, x_pos, y_pos , surface):
-      self.x_pos = x_pos
-      self.y_pos = y_pos
-      self.surface = gameDisplay
-      circle = pygame.draw.circle(self.surface , white, (x_pos , y_pos) , 12)
-   
+   def __init__(self,surface, color, pos, radius, speed):
+      self.surface = surface
+      self.color = color
+      self.pos = pos
+      self.radius = radius
+      self.speed = speed
+
+   def draw(self):
+      pygame.draw.circle(self.surface, self.color,self.pos,self.radius)
+
+   def bounce(self):
+      # self.velocity[0] = -self.velocity[0]
+      # self.velocity[1] = randint(-8,8)
+      pass
+   def move(self):
+      size = [display_width,display_height]
+      for coord in range(0,2):
+         self.pos[coord] += self.speed
+         if self.pos[coord] < self.radius:
+            self.speed = -self.speed
+         if self.pos[coord] + self.radius > size[coord]:
+            self.speed = -self.speed
+      
 
 
 def main():
@@ -67,6 +84,8 @@ def main():
    crashed = False
    x_change = 0
    game_over = False
+
+   
    # the main game
    while not crashed:
       for event in pygame.event.get():
@@ -83,8 +102,14 @@ def main():
          x_change += 10
       gameDisplay.fill(backgroundColor)
       paddle(x_change)
-     # ball(game_over)
-        
+
+      # the DE ball 
+      DEBall = Ball(gameDisplay,white, [round(display_width/2),round(display_height/2)],8 , 2)
+      DEBall.draw()
+
+      DEBall.move()
+
+
       pygame.display.update()
       clock.tick(60)
 
