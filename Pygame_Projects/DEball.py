@@ -41,15 +41,15 @@ def paddle(velocity):
 
 
 class Ball:
-   def __init__(self,surface, color, pos, radius, speed):
+   def __init__(self,surface, color, radius, speed):
       self.surface = surface
       self.color = color
-      self.pos = pos
+      self.pos = [round(display_width/2),round(display_height/2)]
       self.radius = radius
       self.speed = speed
 
    def draw(self):
-      pygame.draw.circle(self.surface, self.color,self.pos + self.speed,self.radius)
+      pygame.draw.circle(self.surface, self.color,self.pos,self.radius)
       
    def bounce(self):
       # self.velocity[0] = -self.velocity[0]
@@ -93,8 +93,9 @@ def main():
       paddle(x_change)
       x = round(display_width/2)
       y = round(display_height/2)
+
       # the DE ball 
-      DEBall = Ball(gameDisplay,white, [x,y],8 , 2)
+      DEBall = Ball(gameDisplay,white, 8 , 2)
       DEBall.draw()
 
       DEBall.move()
