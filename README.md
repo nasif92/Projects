@@ -1,5 +1,8 @@
 # Projects
-Personal Projects I have worked on along with my Computing Science courses
+Personal Projects I have worked on along with my Computing Science courses.
+
+Owner: Nasif Hossain.
+Software may be used for educational purposes.
 
 Some of the notable projects here:
 1) Pygame DE ball: Working on a save the ball project currently.
